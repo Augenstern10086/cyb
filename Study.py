@@ -5,6 +5,7 @@ date:2024年 07月 16日
 """
 import time
 
+
 #2024.8.13
 # print("1 + 1 = ",1 + 1)
 # print("2 - 1 = ",2 - 1)
@@ -947,3 +948,361 @@ import time
 # print("我好")
 # from ssd import test2
 # test2(1, 2)
+#2024.9.12
+# from pyecharts.charts import Line
+# from pyecharts.options import TitleOpts, LegendOpts,ToolboxOpts,VisualMapOpts
+# line = Line()
+# line.add_xaxis(["中国", "美国", "英国"])
+# line.add_yaxis("GDP", [30, 20, 10])
+# line.set_global_opts(
+#     title_opts= TitleOpts(title = "GDP展示",pos_left="center",pos_bottom="1%"),
+#     legend_opts = LegendOpts(is_show=True),
+#     toolbox_opts= ToolboxOpts(is_show=True),
+#     visualmap_opts = VisualMapOpts(is_show=True)
+# )
+# line.render()
+# import json
+# from pyecharts.charts import Line
+# from pyecharts.options import TitleOpts, LegendOpts,ToolboxOpts,VisualMapOpts,LabelOpts
+# f_us = open("D:/美国.txt", "r", encoding="UTF-8")
+# us_data = f_us.read()
+# f_jp = open("D:/日本.txt", "r", encoding="UTF-8")
+# jp_data = f_jp.read()
+# f_in = open("D:/印度.txt", "r", encoding="UTF-8")
+# in_data = f_in.read()
+#
+# us_data = us_data.replace("jsonp_1629344292311_69436(","")
+# us_data = us_data[:-2]
+# jp_data = jp_data.replace("jsonp_1629350871167_29498(","")
+# jp_data = jp_data[:-2]
+# in_data = in_data.replace("jsonp_1629350745930_63180(","")
+# in_data = in_data[:-2]
+#
+# us_dict = json.loads(us_data)
+# jp_dict = json.loads(jp_data)
+# in_dict = json.loads(in_data)
+#
+# us_trend_data = us_dict['data'][0]['trend']
+# jp_trend_data = jp_dict['data'][0]['trend']
+# in_trend_data = in_dict['data'][0]['trend']
+#
+# us_x_data = us_trend_data['updateDate'][:314]
+# us_y_data = us_trend_data['list'][0]['data'][:314]
+# jp_x_data = jp_trend_data['updateDate'][:314]
+# jp_y_data = jp_trend_data['list'][0]['data'][:314]
+# in_x_data = in_trend_data['updateDate'][:314]
+# in_y_data = in_trend_data['list'][0]['data'][:314]
+#
+# line = Line()
+# line.add_xaxis(us_x_data)
+# line.add_yaxis("美国确诊人数",us_y_data,label_opts=LabelOpts(is_show=False))
+# line.add_yaxis("日本确诊人数",jp_y_data,label_opts=LabelOpts(is_show=False))
+# line.add_yaxis("印度确诊人数",in_y_data,label_opts=LabelOpts(is_show=False))
+#
+# line.set_global_opts(
+#     title_opts=TitleOpts(title="2020年美日印三国确诊人数对比折线图",pos_left="center",pos_bottom="1%")
+# )
+# line.render()
+# f_us.close()
+# f_jp.close()
+# f_in.close()
+# from pyecharts.charts import Map
+# from pyecharts.options import VisualMapOpts
+#
+# map = Map()
+#
+# data = [
+#     ("北京市",99),
+#     ("上海市",199),
+#     ("湖南省",299),
+#     ("台湾省",399),
+#     ("广东省",499)
+# ]
+# map.add("测试地图", data, "china")
+# map.set_global_opts(
+#     visualmap_opts= VisualMapOpts(
+#         is_show=True,
+#         is_piecewise=True,
+#         pieces=[
+#             {"min":1,"max":9,"label":"1-9","color":"#CCFFFF"},
+#             {"min":10,"max":99,"label":"10-99","color":"#FF6666"},
+#             {"min":100,"max":500,"label":"100-500","color":"#990033"}
+#         ]
+#     )
+# )
+# map.render()
+# import json
+# from pyecharts.charts import Map
+# from pyecharts.options import VisualMapOpts, TitleOpts
+#
+# f = open("D:/疫情.txt", "r", encoding="UTF-8")
+# data = f.read()
+# f.close()
+# data_dict = json.loads(data)
+# province_data_list = data_dict["areaTree"][0]["children"]
+# data_list = []
+# for province_data in province_data_list:
+#     province_name = province_data["name"]
+#     provice_confirm = province_data["total"]["confirm"]
+#     data_list.append((province_name, provice_confirm))
+#
+# map = Map()
+# map.add("中国疫情地图", data_list, "china")
+# map.set_global_opts(
+#     title_opts=TitleOpts(title="全国疫情地图"),
+#     visualmap_opts=VisualMapOpts(
+#         is_show=True,
+#         is_piecewise=True,
+#         pieces=[
+#             {"min":1,"max":99,"label":"1-9人","color":"#CCFFFF"},
+#             {"min":100,"max":999,"label":"100-999人","color":"#FFFF99"},
+#             {"min":1000,"max":4999,"label":"1000-4999人","color":"#FF9966"},
+#             {"min":5000,"max":9999,"label":"5000-9999人","color":"#FF6666"},
+#             {"min":10000,"max":99999,"label":"10000-99999人","color":"#CC3333"},
+#             {"min":100000,"max":999999,"label":"100000-999999人","color":"#990033"},
+#         ]
+#     )
+# )
+# map.render("全国疫情地图.html")
+#
+# import json
+# from pyecharts.charts import Map
+# from pyecharts.options import VisualMapOpts, TitleOpts
+#
+# f = open("D:/疫情.txt", "r", encoding="UTF-8")
+# data = f.read()
+# f.close()
+# data_dict = json.loads(data)
+# henan_data = data_dict["areaTree"][0]["children"][3]["children"]
+# data_list = []
+# for province_data in henan_data:
+#     province_name = province_data["name"]
+#     province_confirm = province_data["total"]["confirm"]
+#     data_list.append((province_name,province_confirm))
+# map = Map()
+# map.add("河南疫情地图", data_list, "河南")
+# map.set_global_opts(
+#     title_opts=TitleOpts(title="河南疫情地图"),
+#     visualmap_opts=VisualMapOpts(
+#         is_show=True,
+#         is_piecewise=True,
+#         pieces=[
+#             {"min":1,"max":99,"label":"1-9人","color":"#CCFFFF"},
+#             {"min":100,"max":999,"label":"100-999人","color":"#FFFF99"},
+#             {"min":1000,"max":4999,"label":"1000-4999人","color":"#FF9966"},
+#             {"min":5000,"max":9999,"label":"5000-9999人","color":"#FF6666"},
+#             {"min":10000,"max":99999,"label":"10000-99999人","color":"#CC3333"},
+#             {"min":100000,"max":999999,"label":"100000-999999人","color":"#990033"},
+#         ]
+#     )
+# )
+# map.render("河南疫情地图.html")
+# from pyecharts.charts import Bar,Timeline
+# from pyecharts.options import LabelOpts
+# from pyecharts.globals import ThemeType
+# bar1 = Bar()
+# bar1.add_xaxis(["中国", "美国", "英国"])
+# bar1.add_yaxis("GDP",[30, 20, 10] ,label_opts=LabelOpts(position="right"))
+# bar1.reversal_axis()
+# bar1.render("基础柱状图.html")
+
+# bar2 = Bar()
+# bar2.add_xaxis(["中国", "美国", "英国"])
+# bar2.add_yaxis("GDP",[50, 30, 50] ,label_opts=LabelOpts(position="right"))
+# bar2.reversal_axis()
+# bar2.render("基础柱状图.html")
+#
+# bar3 = Bar()
+# bar3.add_xaxis(["中国", "美国", "英国"])
+# bar3.add_yaxis("GDP",[70, 50, 60] ,label_opts=LabelOpts(position="right"))
+# bar3.reversal_axis()
+# bar3.render("基础柱状图.html")
+
+# # timeline = Timeline(
+# #     {
+# #         "theme":ThemeType.LIGHT
+# #     }
+# # )
+# # timeline.add(bar1,"点1")
+# # timeline.add(bar2,"点2")
+# # timeline.add(bar3,"点3")
+# # timeline.add_schema(
+# #     play_interval = 1000,
+#     is_timeline_show = True,
+#     is_auto_play = True,
+#     is_loop_play = True
+# )
+# timeline.render("时间线.html")
+# my_list = [["a", 33], ["b", 55], ["c", 11]]
+#
+# my_list.sort(key=lambda element:element[1], reverse=True)
+# print(my_list)
+# from pyecharts.charts import Bar, Timeline
+# from pyecharts.options import *
+# from pyecharts.globals import ThemeType
+#
+# f = open("D:/1960-2019全球GDP数据.csv", "r", encoding="GB2312")
+# data_lines = f.readlines()
+# f.close()
+# data_lines.pop(0)
+# data_dict = {}
+# for line in data_lines:
+#     year = int(line.split(",")[0])
+#     country = line.split(",")[1]
+#     gdp = float(line.split(",")[2])
+#     try:
+#         data_dict[year].append([country, gdp])
+#     except KeyError:
+#         data_dict[year] = []
+#         data_dict[year].append([country, gdp])
+#
+# timeline = Timeline({"theme": ThemeType.LIGHT})
+# sorted_year_list = sorted(data_dict.keys())
+#
+# for year in sorted_year_list:
+#     data_dict[year].sort(key=lambda element: element[1], reverse=True)
+#     year_data = data_dict[year][0:8]
+#     x_data = []
+#     y_data = []
+#     for country_gdp in year_data:
+#         x_data.append(country_gdp[0])
+#         y_data.append(country_gdp[1] / 100000000)
+#     bar = Bar()
+#     x_data.reverse()
+#     y_data.reverse()
+#     bar.add_xaxis(x_data)
+#     bar.add_yaxis("GDP(亿)", y_data, label_opts=LabelOpts(position="right"))
+#     bar.reversal_axis()
+#     bar.set_global_opts(
+#         title_opts=TitleOpts(title=f"{year}年全球前8GDP数据")
+#     )
+#     timeline.add(bar, str(year))
+#
+# timeline.add_schema(
+#     play_interval=1000,
+#     is_timeline_show=True,
+#     is_auto_play=True,
+#     is_loop_play=False
+# )
+# timeline.render("动态数据图.html")
+# class Student:
+#     name = None
+#     gender = None
+#     nationality = None
+#     native_place = None
+#     age = None
+#
+# stu_1 = Student()
+# stu_1.name = "常英波"
+# stu_1.gender = "男"
+# stu_1.nationality = "中国"
+# stu_1.native_place = "河南省"
+# stu_1.age = 22
+#
+# print(stu_1.name)
+# print(stu_1.gender)
+# print(stu_1.nationality)
+# print(stu_1.native_place)
+# print(stu_1.age)
+#2024.9.14
+
+# class Student:
+#     name = None
+#
+#     def say_hi_1(self):
+#         print(f"大家好！我是{self.name},很高兴认识大家！")
+#
+#     def say_hi_2(self,msg):
+#         print(f"大家好！{self.name},{msg}")
+#
+# stu1 = Student()
+# stu1.name = "常英波"
+# stu1.say_hi_1()
+# stu1.say_hi_2("欢迎大家来到敦煌！")
+#
+# stu2 = Student()
+# stu2.name = "王墨涵"
+# stu2.say_hi_1()
+# stu2.say_hi_2("欢迎大家来到瓜洲！")
+# class Clock:
+#     id = None
+#     price = None
+#
+#     def ring(self):
+#         import winsound
+#         winsound.Beep(1000,3000)
+#
+# clock1 = Clock()
+# clock1.id = "003032"
+# clock1.price = 19.99
+# clock1.ring()
+# print(f"闹钟id:{clock1.id},闹钟价格:{clock1.price}")
+#
+# clock2 = Clock()
+# clock2.id = "003033"
+# clock2.price = 29.99
+# clock2.ring()
+# print(f"闹钟id:{clock1.id},闹钟价格:{clock1.price}")
+# class Student:
+#
+#     def __init__(self,name, age, tel):
+#         self.name = name
+#         self.age = age
+#         self.tel = tel
+#         print("学生类创建了一个类对象")
+# stu1 = Student("杨耀森", 22,"15137772146")
+# print(stu1.name)
+# print(stu1.age)
+# print(stu1.tel)
+# class Student:
+#     def __init__(self, name, age, address):
+#         self.name = name
+#         self.age = age
+#         self.address = address
+#
+#
+# list_student = []
+# for index in range(0, 10):
+#     print(f"当前录入第{index+1}位学生信息,总共需要录入10位学生信息")
+#     name = input("请输入学生姓名:")
+#     age = input("请输入学生年龄:")
+#     address = input("请输入学生地址:")
+#     student = Student(name, age, address)
+#     list_student.append(student)
+#     print(f"学生{index+1}信息录入完成，信息为【学生姓名：{list_student[index].name},"
+#           f"年龄：{list_student[index].age},地址：{list_student[index].address}】")
+# class Student:
+#     def __init__(self, name, age):
+#         self.name = name
+#         self.age = age
+#
+#     def __str__(self):
+#         return f"Student类对象，name:{self.name}, age:{self.age}"
+#
+#     def __lt__(self, other):
+#         return self.age < other.age
+#
+#     def __le__(self, other):
+#         return self.age <= other.age
+#
+#     def __eq__(self, other):
+#         return self.age == other.age
+# stu1 = Student("周杰伦", 31)
+# stu2 = Student("林俊杰", 31)
+# print(stu1 == stu2)
+# class Phone:
+#     __current_voltage = 0.5
+#
+#     def __keep_single_core(self):
+#         print("让CPU以单核模式运行")
+#
+#     def call_by_5G(self):
+#         if self.__current_voltage > 1:
+#             print("5G通话已开启")
+#         else:
+#             self.__keep_single_core()
+#             print("电量不足，无法使用5G通话，并已设置为单核模式进行省电。")
+#
+#
+# iPhone = Phone()
+# iPhone.call_by_5G()
